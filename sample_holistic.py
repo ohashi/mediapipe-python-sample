@@ -13,7 +13,7 @@ from utils import CvFpsCalc
 def get_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--device", help='capture device #(default:0) or movie filename', default=0)
     parser.add_argument("--width", help='cap width', type=int, default=960)
     parser.add_argument("--height", help='cap height', type=int, default=540)
 
@@ -32,6 +32,7 @@ def get_args():
                         default=0.5)
 
     parser.add_argument('--use_brect', action='store_true')
+    parser.add_argument('--selfie', help='mirror mode', action='store_true')
 
     args = parser.parse_args()
 
@@ -52,6 +53,7 @@ def main():
     min_tracking_confidence = args.min_tracking_confidence
 
     use_brect = args.use_brect
+    selfie = args.selfie
 
     # カメラ準備 ###############################################################
     cap = cv.VideoCapture(cap_device)
@@ -77,7 +79,8 @@ def main():
         ret, image = cap.read()
         if not ret:
             break
-        image = cv.flip(image, 1)  # ミラー表示
+        if selfie:
+            image = cv.flip(image, 1)  # ミラー表示
         debug_image = copy.deepcopy(image)
 
         # 検出実施 #############################################################

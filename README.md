@@ -32,7 +32,7 @@ pip install mediapipe
 python sample_facemesh.py
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -52,12 +52,15 @@ python sample_facemesh.py
 * --use_brect<br>
 外接矩形を描画するか否か<br>
 デフォルト：指定なし
+* --selfie<br>
+ミラーにするかどうか<br>
+デフォルト：指定なし
 #### Hands
 ```bash
 python sample_hand.py
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -77,12 +80,15 @@ python sample_hand.py
 * --use_brect<br>
 外接矩形を描画するか否か<br>
 デフォルト：指定なし
+* --selfie<br>
+ミラーにするかどうか<br>
+デフォルト：指定なし
 #### Pose
 ```bash
 python sample_pose.py
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -102,13 +108,16 @@ python sample_pose.py
 デフォルト：0.5
 * --use_brect<br>
 外接矩形を描画するか否か<br>
+デフォルト：指定なし
+* --selfie<br>
+ミラーにするかどうか<br>
 デフォルト：指定なし
 #### Holistic
 ```bash
 python sample_holistic.py
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -129,12 +138,15 @@ python sample_holistic.py
 * --use_brect<br>
 外接矩形を描画するか否か<br>
 デフォルト：指定なし
+* --selfie<br>
+ミラーにするかどうか<br>
+デフォルト：指定なし
 #### Face Detection
 ```bash
 python sample_facedetection.py
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -145,12 +157,15 @@ python sample_facedetection.py
 * --min_detection_confidence<br>
 検出信頼値の閾値<br>
 デフォルト：0.5
+* --selfie<br>
+ミラーにするかどうか<br>
+デフォルト：指定なし
 #### Objectron
 ```bash
 python sample_objectron.py
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -170,12 +185,15 @@ python sample_objectron.py
 * --model_name<br>
 検出対象(20201/03/03時点：'Shoe', 'Chair', 'Cup', 'Camera'の4種類)<br>
 デフォルト：Cup
+* --selfie<br>
+ミラーにするかどうか<br>
+デフォルト：指定なし
 #### Selfie Segmentation
 ```bash
 python sample_selfie_segmentation
 ```
 * --device<br>
-カメラデバイス番号の指定<br>
+カメラデバイス番号の指定または動画ファイル名<br>
 デフォルト：0
 * --width<br>
 カメラキャプチャ時の横幅<br>
@@ -194,6 +212,9 @@ python sample_selfie_segmentation
 * --bg_path<br>
 背景画像格納パス ※未指定時はグリーンバック<br>
 デフォルト：None
+* --selfie<br>
+ミラーにするかどうか<br>
+デフォルト：指定なし
 
 # For Raspberry Pi
 以下のRaspberry Pi向けビルドを利用することで、Raspberry Pi上で本サンプルを試すことが出来ます。
@@ -206,6 +227,7 @@ python sample_selfie_segmentation
 - [x] ~~Poseのz座標表示を追加 (mediapipe 0.8.3)~~
 - [x] ~~[Face Detection](https://google.github.io/mediapipe/solutions/face_detection)のサンプル追加 (mediapipe 0.8.3)~~
 - [x] ~~[Objectron](https://google.github.io/mediapipe/solutions/objectron)のサンプル追加 (mediapipe 0.8.3)~~
+- [x] 動画ファイル対応とミラーをフラグに変更
 
 # Reference
 * [MediaPipe](https://github.com/google/mediapipe)
