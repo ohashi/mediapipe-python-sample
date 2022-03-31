@@ -1,14 +1,14 @@
 # mediapipe-python-sample
 [MediaPipe](https://github.com/google/mediapipe)のPythonパッケージのサンプルです。<br>
-2021/07/23時点でPython実装のある以下7機能について用意しています。
+2021/12/14時点でPython実装のある以下7機能について用意しています。
 * [Hands](https://google.github.io/mediapipe/solutions/hands)<br>
-<img src="https://user-images.githubusercontent.com/37477845/101514487-a59d8500-39c0-11eb-8346-d3c9ab917ea6.gif" width="45%"><br>
+<img src="https://user-images.githubusercontent.com/37477845/101514487-a59d8500-39c0-11eb-8346-d3c9ab917ea6.gif" width="45%">　<img src="https://user-images.githubusercontent.com/37477845/146001896-e6a4df4c-7e83-4449-a3af-876491e301ed.gif" width="45%"><br>
 * [Pose](https://google.github.io/mediapipe/solutions/pose)<br>
-<img src="https://user-images.githubusercontent.com/37477845/101512555-7ab23180-39be-11eb-814c-9fad59e0cf9a.gif" width="45%">　<img src="https://user-images.githubusercontent.com/37477845/126742650-6ab0df29-a2f6-4bb8-8dbc-54db691135e6.gif" width="45%"><br>
+<img src="https://user-images.githubusercontent.com/37477845/101512555-7ab23180-39be-11eb-814c-9fad59e0cf9a.gif" width="45%">　<img src="https://user-images.githubusercontent.com/37477845/126742650-6ab0df29-a2f6-4bb8-8dbc-54db691135e6.gif" width="45%"><br><img src="https://user-images.githubusercontent.com/37477845/130624523-4be1cb41-92b8-4003-a6b5-659ac364a181.gif" width="45%"><br>
 * [Face Mesh](https://google.github.io/mediapipe/solutions/face_mesh)<br>
-<img src="https://user-images.githubusercontent.com/37477845/101512592-869df380-39be-11eb-8a80-241e272cc195.gif" width="45%"><br>
+<img src="https://user-images.githubusercontent.com/37477845/101512592-869df380-39be-11eb-8a80-241e272cc195.gif" width="45%">　<img src="https://user-images.githubusercontent.com/37477845/136427793-bd387581-d3f3-4208-8dea-512f27e6c648.gif" width="45%"><br>
 * [Holistic](https://google.github.io/mediapipe/solutions/holistic)<br>
-<img src="https://user-images.githubusercontent.com/37477845/101908209-1336f480-3bff-11eb-9f3f-5a3055821ebd.gif" width="45%">　<img src="https://user-images.githubusercontent.com/37477845/126744354-d6307bb2-b720-4e8e-9896-146ee3e7ae94.gif" width="45%"><br>
+<img src="https://user-images.githubusercontent.com/37477845/101908209-1336f480-3bff-11eb-9f3f-5a3055821ebd.gif" width="45%">　<img src="https://user-images.githubusercontent.com/37477845/126744354-d6307bb2-b720-4e8e-9896-146ee3e7ae94.gif" width="45%"><br><img src="https://user-images.githubusercontent.com/37477845/136389144-6d8ef7cc-e970-4aff-9153-e1bb198c594e.gif" width="45%"><br>
 * [Face Detection](https://google.github.io/mediapipe/solutions/face_detection)<br>
 <img src="https://user-images.githubusercontent.com/37477845/109686899-0e625b00-7bc6-11eb-991e-7fbecfb841cf.gif" width="45%"><br>
 * [Objectron](https://google.github.io/mediapipe/solutions/objectron)<br>
@@ -17,8 +17,9 @@
 <img src="https://user-images.githubusercontent.com/37477845/120812014-8f473f00-c587-11eb-8ac8-944c25c2f264.gif" width="45%"><br>
 
 # Requirement 
-* mediapipe 0.8.6 or later
+* mediapipe 0.8.8 or later<br>※旧バージョンのMediaPipeを使用する場合は[Tags](https://github.com/Kazuhito00/mediapipe-python-sample/tags)の旧コミット版を利用ください
 * OpenCV 3.4.2 or later
+* matplotlib 3.4.1 or later ※Pose/Holisticでplot_world_landmarkオプションを使用する場合のみ
 
 mediapipeはpipでインストールできます。
 ```bash
@@ -43,6 +44,9 @@ python sample_facemesh.py
 * --max_num_hands<br>
 最大手検出数<br>
 デフォルト：1
+* --refine_landmarks<br>
+[ATTENTION MESH MODEL](https://google.github.io/mediapipe/solutions/face_mesh#attention-mesh-model)を使用するか否か ※目と口周りのランドマークがより正確になる<br>
+デフォルト：指定なし
 * --min_detection_confidence<br>
 検出信頼値の閾値<br>
 デフォルト：0.5
@@ -68,6 +72,9 @@ python sample_hand.py
 * --height<br>
 カメラキャプチャ時の縦幅<br>
 デフォルト：540
+* --model_complexity<br>
+モデルの複雑度(0:軽量 1:高精度)<br>
+デフォルト：1
 * --max_num_faces<br>
 最大顔検出数<br>
 デフォルト：1
@@ -80,6 +87,8 @@ python sample_hand.py
 * --use_brect<br>
 外接矩形を描画するか否か<br>
 デフォルト：指定なし
+* --plot_world_landmark<br>
+World座標をmatplotlib表示する ※matplotlibを用いるため処理が重くなります<br>
 * --selfie<br>
 ミラーにするかどうか<br>
 デフォルト：指定なし
@@ -105,6 +114,12 @@ python sample_pose.py
 デフォルト：0.5
 * --min_tracking_confidence<br>
 トラッキング信頼値の閾値<br>
+デフォルト：0.5
+* --enable_segmentation<br>
+人物セグメンテーションを有効化するか<br>
+デフォルト：指定なし
+* --segmentation_score_th<br>
+人物セグメンテーションの閾値<br>
 デフォルト：0.5
 * --use_brect<br>
 外接矩形を描画するか否か<br>
@@ -136,6 +151,15 @@ python sample_holistic.py
 デフォルト：0.5
 * --min_tracking_confidence<br>
 トラッキング信頼値の閾値<br>
+デフォルト：0.5
+* --enable_segmentation<br>
+人物セグメンテーションを有効化するか<br>
+デフォルト：指定なし
+* --unuse_smooth_landmarks<br>
+人物セグメンテーションのスムース化を使用しない<br>
+デフォルト：指定なし
+* --segmentation_score_th<br>
+人物セグメンテーションの閾値<br>
 デフォルト：0.5
 * --use_brect<br>
 外接矩形を描画するか否か<br>
@@ -197,7 +221,7 @@ python sample_objectron.py
 デフォルト：指定なし
 #### Selfie Segmentation
 ```bash
-python sample_selfie_segmentation
+python sample_selfie_segmentation.py
 ```
 * --device<br>
 カメラデバイス番号の指定または動画ファイル名<br>
@@ -224,9 +248,12 @@ python sample_selfie_segmentation
 デフォルト：指定なし
 
 # For Raspberry Pi
-以下のRaspberry Pi向けビルドを利用することで、Raspberry Pi上で本サンプルを試すことが出来ます。
+以下のRaspberry Pi向けビルドを利用することで、Raspberry Pi上で本サンプルを試すことが出来ます。<br>
+mediapipe-bin は、v0.8.4 および v0.8.5のバージョンが提供されています。<br>
+mediapipe-python-sample は タグv0.8.4、v0.8.5のコードをご使用ください。<br>
 * [Raspberry Piで手軽にMediaPipeを楽しむ方法](https://zenn.dev/karaage0703/articles/63fed2a261096d)
 * [PINTO0309/mediapipe-bin](https://github.com/PINTO0309/mediapipe-bin)<br><img src="https://user-images.githubusercontent.com/33194443/120130242-a4774300-c200-11eb-8a74-d7f74384a4eb.gif" width="30%">
+<!-- [Raspberry PiでMediapipeをPythonで使用する【pipでインストール】](https://www.hiro877.com/entry/rasp-mp-pip-inst) -->
 
 
 # ToDo
